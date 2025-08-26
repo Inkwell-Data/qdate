@@ -147,12 +147,6 @@
 -type binary_or_string() :: binary() | string().
 -type disambiguate() :: prefer_standard | prefer_daylight | both.
 
-%% erlang:get_stacktrace/0 is deprecated in OTP 21
--ifndef(OTP_RELEASE).
--define(WITH_STACKTRACE(T, R, S), T:R -> S = erlang:get_stacktrace(), ).
--else.
--define(WITH_STACKTRACE(T, R, S), T:R:S ->).
--endif.
 
 %% This the value in gregorian seconds for jan 1st 1970, 12am
 %% It's used to convert to and from unixtime, since unixtime starts 
@@ -1165,7 +1159,7 @@ try_parsers(RawDate,[{ParserKey,Parser}|Parsers]) ->
         Other ->
             throw({invalid_parser_return_value,[{parser_key,ParserKey},{return,Other}]})
     catch
-        ?WITH_STACKTRACE(Error, Reason, Stacktrace)
+        Error:Reason ->
             throw({error_in_parser,[{error,{Error,Reason}},{parser_key,ParserKey}, {stacktrace, Stacktrace}]})
     end.
 
