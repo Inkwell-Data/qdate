@@ -1160,7 +1160,7 @@ try_parsers(RawDate,[{ParserKey,Parser}|Parsers]) ->
             throw({invalid_parser_return_value,[{parser_key,ParserKey},{return,Other}]})
     catch
         Error:Reason ->
-            throw({error_in_parser,[{error,{Error,Reason}},{parser_key,ParserKey}, {stacktrace, Stacktrace}]})
+            throw({error_in_parser,[{error,{Error,Reason}},{parser_key,ParserKey}]})
     end.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
